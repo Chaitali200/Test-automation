@@ -1,4 +1,4 @@
-const { type } = require("cypress/types/jquery")
+//const { type } = require("cypress/types/jquery")
 
 
 describe('Test the login functionality for pathology lab app', function () {
@@ -16,7 +16,8 @@ describe('Test the login functionality for pathology lab app', function () {
         cy.get('.jss99 > .MuiButton-label').click()
     })
     it('Verify the GENERAL DETAILS with test data', function () {
-        cy.get('[name="height"]').type('188.976')
+        cy.wait(10000)
+        cy.get('[name="height"]').type('188.97')
         cy.get('input[name="weight"]').type(69)
         cy.get('#mui-component-select-gender').click()
         cy.get('[data-value="male"]').click()
@@ -28,19 +29,26 @@ describe('Test the login functionality for pathology lab app', function () {
     it('Verify the GENERAL DETAILS with test data', function () {
         cy.get('#patient-test').click({ multiple: true, force: true })
         cy.wait(1000)
-        cy.get('#patient-test').type('V{downArrow}{enter}')
+        cy.get('#patient-test').type('UR{downArrow}{enter}')
         cy.get('div[class="MuiFormControl-root"] div[role="button"]').click({ multiple: true, force: true })
         cy.get('div[id="menu-"] li:nth-child(3)').click()
+        cy.get('#patient-tests-labs').click({ multiple: true, force: true })
+        cy.wait(1000)
+        cy.get('#patient-tests-labs').type('UR{downArrow}{enter}')
         cy.get('input[name="doctor_name"]').click({ multiple: true, force: true })
+        
         cy.wait(1000)
         cy.get('input[name="doctor_name"]').type('Dr{downArrow}{enter}')
         cy.get('#mui-component-select-doctor_commission').click()
         cy.get('[data-value="10"]').click()
-        //cy.get('.jss99 > .MuiButton-label').click()
         cy.wait(1000)
         cy.get('.MuiIconButton-label > .material-icons').dblclick()
-        // cy.get(':nth-child(1) > .MuiInputBase-root > .MuiSelect-root').click()
-        // cy.get(':nth-child(1) > .MuiInputBase-root > .MuiSelect-root').type('{enter}')
+        cy.get(':nth-child(1) > .MuiInputBase-root > .MuiSelect-root').click({force: true})
+        cy.get('.MuiList-root > .MuiButtonBase-root').click({force: true},'{enter}')
+        cy.get('[title="Save"] > .MuiIconButton-label > .material-icons').click()
+        cy.get('.jss99 > .MuiButton-label').click()
+        cy.wait(7000)
+        cy.get('[href="/dashboard"] > .MuiButtonBase-root').click()
     })
    
 })

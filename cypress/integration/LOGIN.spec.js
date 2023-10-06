@@ -1,3 +1,4 @@
+//SKIP
 
 ///<reference types="cypress"/>
 
@@ -7,7 +8,7 @@ describe('Test the login functionality for pathology lab app', function ()
      {
         cy.visit('https://gor-pathology.web.app/')
      })
-    it('Login with valid credential', function ()
+    it.only('Login with valid credential', function ()
      {
         cy.wait(1000)
         //Apply static loader for load website.
