@@ -1,0 +1,46 @@
+const { type } = require("cypress/types/jquery")
+
+
+describe('Test the login functionality for pathology lab app', function () {
+    before('Run before it block', function () {
+        cy.visit('https://gor-pathology.web.app/')
+    })
+    it('Create the patient with valid details', function () {
+        cy.wait(9000)
+        cy.get('[href="/patients"] > .MuiButtonBase-root > .MuiListItemText-root > .MuiTypography-root').click()
+        cy.wait(9000)
+        cy.get('[style="display: flex; align-items: center;"] > a > .MuiButtonBase-root > .MuiButton-label').click({ force: true })
+        cy.get('input[name="name"]').type('TestData')
+        cy.get('input[name="email"]').type('Demoemail00@gmail.com')
+        cy.get('input[name="phone"]').type(9988776655)
+        cy.get('.jss99 > .MuiButton-label').click()
+    })
+    it('Verify the GENERAL DETAILS with test data', function () {
+        cy.get('[name="height"]').type('188.976')
+        cy.get('input[name="weight"]').type(69)
+        cy.get('#mui-component-select-gender').click()
+        cy.get('[data-value="male"]').click()
+        cy.get('input[name="age"]').type(29)
+        cy.get('[name="systolic"]').type(80)
+        cy.get('[name="diastolic"]').type(90)
+        cy.get('.jss99 > .MuiButton-label').click()
+    })
+    it('Verify the GENERAL DETAILS with test data', function () {
+        cy.get('#patient-test').click({ multiple: true, force: true })
+        cy.wait(1000)
+        cy.get('#patient-test').type('V{downArrow}{enter}')
+        cy.get('div[class="MuiFormControl-root"] div[role="button"]').click({ multiple: true, force: true })
+        cy.get('div[id="menu-"] li:nth-child(3)').click()
+        cy.get('input[name="doctor_name"]').click({ multiple: true, force: true })
+        cy.wait(1000)
+        cy.get('input[name="doctor_name"]').type('Dr{downArrow}{enter}')
+        cy.get('#mui-component-select-doctor_commission').click()
+        cy.get('[data-value="10"]').click()
+        //cy.get('.jss99 > .MuiButton-label').click()
+        cy.wait(1000)
+        cy.get('.MuiIconButton-label > .material-icons').dblclick()
+        // cy.get(':nth-child(1) > .MuiInputBase-root > .MuiSelect-root').click()
+        // cy.get(':nth-child(1) > .MuiInputBase-root > .MuiSelect-root').type('{enter}')
+    })
+   
+})
